@@ -63,3 +63,35 @@ print('Mean of rail2=',mean_list[2],'\n','min of rail2=',min( rail2),'\n','max o
 print('Mean of rail3=',mean_list[3],'\n','min of rail3=',min( rail3),'\n','max of rail3=',max( rail3),'\n',check[3],'\n')
 print('Mean of rail4=',mean_list[4],'\n','min of rail4=',min( rail4),'\n','max of rail4=',max( rail4),'\n',check[4],'\n')
 print('Mean of rail5=',mean_list[5],'\n','min of rail5=',min( rail5),'\n','max of rail5=',max( rail5),'\n',check[5],'\n')
+
+#output
+
+Mean of rail0= 1.8258545614438064 
+ min of rail0= 1.825072 
+ max of rail0= 1.828548 
+ Pass 
+
+Mean of rail1= 1.1481795662018048 
+ min of rail1= 1.147289 
+ max of rail1= 1.150092 
+ Pass 
+
+Mean of rail2= 0.8898042688207315 
+ min of rail2= 0.889111 
+ max of rail2= 0.892021 
+ Pass 
+
+Mean of rail3= 1.0897530705264884 
+ min of rail3= 1.089012 
+ max of rail3= 1.092064 
+ Pass 
+
+Mean of rail4= 1.7811104887649665 
+ min of rail4= 1.780269 
+ max of rail4= 1.784172 
+ Pass 
+
+Mean of rail5= 3.1792896719698214 
+ min of rail5= 3.173745 
+ max of rail5= 3.190249 
+ Fail 
