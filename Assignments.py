@@ -1,4 +1,4 @@
-# Q1) Write a program to get the Reset Event ID from last-reset-info-logs.txt. Find the Event corresponding to the Reset Event ID from fusa-events-mapping.xlsx and display it.
+Q1) Write a program to get the Reset Event ID from last-reset-info-logs.txt. Find the Event corresponding to the Reset Event ID from fusa-events-mapping.xlsx and display it.
 
 
 import pandas as pd
@@ -21,7 +21,7 @@ Reset Event ID	Event
 
 
 
-# Q2) Write a program to get the list of top 10 moving detections with maximum SNR for each scan.(flags parameter is empty for moving detections)
+Q2) Write a program to get the list of top 10 moving detections with maximum SNR for each scan.(flags parameter is empty for moving detections)
 
 
 with open("/home/fousiai/Downloads/replay-det_VP160.txt",'r') as file:
