@@ -1,3 +1,5 @@
+                                                    ASSIGNMENT1
+
 Q1) Write a program to get the Reset Event ID from last-reset-info-logs.txt. Find the Event corresponding to the Reset Event ID from fusa-events-mapping.xlsx and display it.
 
 
@@ -495,6 +497,8 @@ max_snr(detection, 10)
 9   19   5.636   0.755   0.0  52.671  -99.608  13.983
 
     
+                                                      ASSIGNMENT 2
+    
 Q3)Write a program to compute mean(reference), maximum and minimum voltage for each rail from the capture logs. The diag output will give the reference values for each rail(0-5). Compare this reference value with the reference value from the capture log and report PASS if values approximately match.
 
 
@@ -593,3 +597,157 @@ Mean of rail5= 3.1792896719698214
  max of rail5= 3.190249 
  Fail 
     
+                                                        ASSIGNMENT 3
+    
+ Q4)Write a program using class to display the actual target and ghost target for each scan from the list of top 10 moving detections. To identify if a target is a ghost target,
+
+
+import pandas as pd
+def get_detections( detection):
+
+  with open("/home/fousiai/Downloads/replay-det_VP160.txt",'r') as file:
+    data = file.readlines()
+    file.close()
+  value = []
+  for line in data:
+    if "Skipped" in line:
+      break  
+    x = line.find('SS')
+    if x == -1:
+        list_of_words = line.split()
+        if "Scan sequence" in line:
+          seq_no=list_of_words[2].replace(',', '')
+          if seq_no != "0":
+            detection.append(value)
+            value = []
+          continue
+         
+        else :
+          value.append( [
+            seq_no,
+            float(list_of_words[1]),
+            float(list_of_words[3]),
+            float(list_of_words[5]),
+            float(list_of_words[7]),
+            float(list_of_words[9]),
+            float(list_of_words[11]) #snr
+          ])
+  detection.append(value)
+  return detection
+ 
+def max_snr(detection,k):
+
+  for scan in detection:
+    details = pd.DataFrame(scan,columns = ['scan','rng','azi','elev','dopl','magn','snr'])
+    rslt_pd = details.sort_values(by = 'snr',ascending = 0,ignore_index = 1)
+    print("\n",rslt_pd.iloc[ :k])
+    
+    
+def find_target( detection):
+    target = 11.46
+    scn=0
+    for scan in detection:
+        print( "Scan", scn)
+        scn+=1
+        ghost_target = []
+        for i in scan:
+            if  (target <= i[1] < target+2):
+                ghost_target.append( i)
+        ghost_target.sort(key=lambda a:a[1])
+        if ghost_target == []:
+            print( "No target and ghost target found")
+            continue
+        
+        Target = ghost_target.pop(0)
+
+        actualGhost = []
+        for i in ghost_target:
+            if round(i[4]) == -round(Target[4]):
+                actualGhost.append( i)
+                
+        print("Targets")
+        details = pd.DataFrame([Target],columns = ['scan','rng','azi','elev','dopl','magn','snr'])
+        print("\n",details.iloc[ :1])
+        
+        if actualGhost == []:
+            continue
+            
+        print("\nGhost targets")
+        details = pd.DataFrame(actualGhost,columns = ['scan','rng','azi','elev','dopl','magn','snr'])
+        rslt_pd = details.sort_values(by = 'snr',ascending = 0,ignore_index = 1)
+        print("\n",rslt_pd.iloc[ :10])       
+detection=[]      
+get_detections(detection)  
+find_target( detection)
+
+#output
+
+Scan 0
+Targets
+
+   scan     rng     azi  elev   dopl     magn     snr
+0    0  11.467 -63.349   0.0  10.16 -100.396  10.007
+
+Ghost targets
+
+   scan     rng     azi  elev    dopl    magn     snr
+0    0  11.580   2.042   0.0  -9.990 -62.363  46.466
+1    0  11.898  -2.842   0.0 -10.075 -98.140  11.208
+2    0  11.898  59.062   0.0 -10.075 -98.970  10.294
+Scan 1
+No target and ghost target found
+Scan 2
+No target and ghost target found
+Scan 3
+No target and ghost target found
+Scan 4
+No target and ghost target found
+Scan 5
+No target and ghost target found
+Scan 6
+No target and ghost target found
+Scan 7
+No target and ghost target found
+Scan 8
+No target and ghost target found
+Scan 9
+Targets
+
+   scan    rng    azi  elev  dopl    magn     snr
+0    9  11.58  0.408   0.0  9.99 -68.457  42.966
+Scan 10
+No target and ghost target found
+Scan 11
+No target and ghost target found
+Scan 12
+Targets
+
+   scan    rng    azi  elev  dopl    magn     snr
+0   12  11.58  0.408   0.0  9.99 -68.514  43.034
+Scan 13
+No target and ghost target found
+Scan 14
+No target and ghost target found
+Scan 15
+No target and ghost target found
+Scan 16
+No target and ghost target found
+Scan 17
+No target and ghost target found
+Scan 18
+No target and ghost target found
+Scan 19
+No target and ghost target found
+
+
+
+
+
+
+
+
+
+
+
+
+
