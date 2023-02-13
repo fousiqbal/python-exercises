@@ -193,6 +193,5 @@ Set a random seed and get a random number between 0 and 1:
 0.8444218515250481
 0.13436424411240122
 
-9)
 
 
