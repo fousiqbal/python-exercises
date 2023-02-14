@@ -193,5 +193,64 @@ Set a random seed and get a random number between 0 and 1:
 0.8444218515250481
 0.13436424411240122
 
+                               DocString
+ class school:
+    '''Class School'''
+  def __init__(self, name, std):
+    '''Constructor for class school'''
+    self.name = name
+    self.std = std
+  def disp(self):
+    '''Function to display'''
+    print(self.name)
+    print(self.std)   
+help(school.disp)
+st = school("Fousia", 10)
+print(st.__doc__)   
 
+                               Directory
+   
+import os 
+def current_path(): 
+    print("Current working directory before") 
+    print(os.getcwd()) 
+    print() 
+current_path()
+os.chdir('../') 
+current_path() 
 
+                               Argparse
+    
+import argparse
+parser.add_argument('integers', metavar ='N', type = int, nargs ='+',help ='an integer for the accumulator') 
+parser.add_argument(dest ='accumulate', action ='store_const',const = sum,  help ='sum the integers')
+args = parser.parse_args()
+print(args.accumulate(args.integers))
+ 
+                               Subprocess
+        
+import subprocess
+subprocess.run(["python3","-c", "init.py"])
+
+                                Sysarg
+
+import sys
+n = len(sys.argv)
+print("Total arguments passed:", n)
+print("\nName of Python script:", sys.argv[0])
+print("\nArguments passed:", end = " ")
+for i in range(1, n):
+    print(sys.argv[i], end = " ")   
+Sum = 0
+for i in range(1, n):
+    Sum += int(sys.argv[i])     
+print("\n\nResult:", Sum)
+
+                                Sysstin
+    
+import sys  
+for line in sys.stdin: 
+    if 'q' == line.rstrip(): 
+        break
+    print(f'Input : {line}') 
+print("Exit") 
