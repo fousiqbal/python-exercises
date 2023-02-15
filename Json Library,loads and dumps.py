@@ -60,7 +60,7 @@ print("json false : ", json_f)
 
 #output
 json dict :  {"name": "John", "age": 10, "class": "V"}
-jason list :  ["Red", "Green", "Blue"]
+json list :  ["Red", "Green", "Blue"]
 json string :  "Python Json"
 json number1 :  1234
 json number2 :  21.34
