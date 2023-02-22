@@ -3,7 +3,7 @@
 
 from statistics import mean
 
-with open("/home/fousiai/Downloads/capture_10mslog.txt",'r') as fin:
+with open("/home/fousiai/Downloads/capture_10mslog.txt",'r') as fin:   #reads the file
     file_data = fin.read()
     fin.close()
 with open("/home/fousiai/Downloads/diag_vm_poll_100ms(1)log.txt",'r') as fin:
