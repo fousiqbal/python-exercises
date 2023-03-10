@@ -11,7 +11,7 @@ with open("/home/fousiai/Downloads/replay-det_VP160.txt",'r') as file:  #read th
 #         print(x)
         if x ==-1:
             list_of_words = line.split()
-            if( len( list_of_words) < 8):   #seperate the first 2 lines
+            if( len( list_of_words) < 10):   #seperate the first 2 lines
                 snr_value.append( t)
                 t = []
                 continue
