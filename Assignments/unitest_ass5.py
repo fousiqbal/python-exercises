@@ -1,3 +1,4 @@
+
 """
 This code reads sensor data from a file and prints it to the console with a specified time delay of 100ms between each reading. It takes two optional arguments:
     --duration: the time delay (in seconds) between readings, defaults to 0.1 seconds if not provided
@@ -54,16 +55,19 @@ class TestReadSensorData(unittest.TestCase):
     def test_read_file(self):
         with patch("time.sleep") as mock_sleep:
             # create a file with sensor values
-            sensor_file = open(self.sensor_data, "w")
-            sensor_file.write("1\n2\n3")
-            sensor_file.close()
+              location = "/home/fousiai/python_training/python-exercises/Assignments/sensor_data.py"
+              sensor_file = open(self.sensor_data, 'w')
+              sensor_file.write("1\n2\n3")
+              sensor_file.close()
+        with open(self.sensor_data, 'r') as f:
+            # redirect stdout to check printed values
+            with patch('sys.stdout', new=io.StringIO()) as fake_out:
+                read_sensor_data(self.duration, self.sensor_data)
+                self.assertEqual(fake_out.getvalue().strip(), "1\n2\n3")
 
-            with open(self.sensor_data, "r") as f:
-                # redirect stdout to check printed values
-                with patch("sys.stdout", new=io.StringIO()) as fake_out:
-                    read_sensor_data(self.duration, self.sensor_data)
-                    self.assertEqual(fake_out.getvalue().strip(), "1\n2\n3")
 
 
 if __name__ == "__main__":
     unittest.main()
+    
+

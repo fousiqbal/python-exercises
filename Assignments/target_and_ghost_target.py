@@ -4,14 +4,14 @@
 import pandas as pd
 def get_detections( detection):
 
-  with open("/home/fousiai/Downloads/replay-det_VP160.txt",'r') as file:
+  with open("/home/fousiai/Downloads/replay-det_VP160.txt",'r') as file:  #read the file
     data = file.readlines()
     file.close()
   value = []
   for line in data:
     if "Skipped" in line:
       break  
-    x = line.find('SS')
+    x = line.find('SS')  #to remove ss
     if x == -1:
         list_of_words = line.split()
         if "Scan sequence" in line:
@@ -24,17 +24,17 @@ def get_detections( detection):
         else :
           value.append( [
             seq_no,
-            float(list_of_words[1]),
-            float(list_of_words[3]),
-            float(list_of_words[5]),
-            float(list_of_words[7]),
-            float(list_of_words[9]),
+            float(list_of_words[1]), #rng
+            float(list_of_words[3]), #azi
+            float(list_of_words[5]), #elev
+            float(list_of_words[7]), #dopl
+            float(list_of_words[9]), #magn
             float(list_of_words[11]) #snr
           ])
   detection.append(value)
   return detection
  
-def max_snr(detection,k):
+def max_snr(detection,k):  
 
   for scan in detection:
     details = pd.DataFrame(scan,columns = ['scan','rng','azi','elev','dopl','magn','snr'])
@@ -42,7 +42,7 @@ def max_snr(detection,k):
     print("\n",rslt_pd.iloc[ :k])
     
     
-def find_target( detection):
+def find_target( detection):  #target condition
     target = 11.46
     scn=0
     for scan in detection:
@@ -50,7 +50,7 @@ def find_target( detection):
         scn+=1
         ghost_target = []
         for i in scan:
-            if  (target <= i[1] < target+2):
+            if  (target <= i[1] < target+2):  #ghost target condition
                 ghost_target.append( i)
         ghost_target.sort(key=lambda a:a[1])
         if ghost_target == []:
